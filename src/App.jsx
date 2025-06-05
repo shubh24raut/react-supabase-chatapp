@@ -90,7 +90,7 @@ function App() {
 
   return (
     <div className="flex items-center justify-center bg-gray-800 h-screen w-full text-white">
-      <div className="flex items-center justify-center h-screen w-full max-w-[1280px] mx-auto p-10 sm:p-0">
+      <div className="flex items-center justify-center h-screen w-full max-w-[1280px] mx-auto p-4 sm:p-0">
         {user ? (
           <div className="flex flex-col border border-gray-400 h-full w-full sm:h-[600px] sm:w-[600px] justify-between rounded-md">
             <div className="p-3 md:p-4 border-b border-white flex items-center justify-between">

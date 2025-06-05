@@ -29,7 +29,10 @@ A simple, elegant **realtime chat application** built using:
 
 > _Coming soon_ – Add screenshots of login page and chat interface!
 
----
+![image](https://github.com/user-attachments/assets/02f043af-7817-4727-8525-8843599b78da)
+![image](https://github.com/user-attachments/assets/7365bbb6-b83f-4aef-8f11-e6043507fd3d)
+
+
 
 ## 🧑‍💻 Tech Stack
 

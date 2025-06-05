@@ -8,6 +8,7 @@ function App() {
   const [newMessage, setNewMessage] = useState("");
   const [usersOnline, setUsersOnline] = useState([]);
   const roomRef = useRef(null);
+  const bottomRef = useRef(null);
 
   useEffect(() => {
     if (!user) {
@@ -88,6 +89,12 @@ function App() {
     return time;
   };
 
+  // SCROLL WHEN NEW MSG
+  useEffect(() => {
+    // Scroll to bottom when messages change
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div className="flex items-center justify-center bg-gray-800 h-screen w-full text-white">
       <div className="flex items-center justify-center h-screen w-full max-w-[1280px] mx-auto p-4 sm:p-0">
@@ -118,40 +125,43 @@ function App() {
                 messages.map((msg) => {
                   const isOwnMessage = msg.senderId === user?.id;
                   return (
-                    <div
-                      key={msg.id}
-                      className={`flex items-center space-x-2 ${
-                        isOwnMessage ? "justify-end" : "justify-start"
-                      }`}
-                    >
-                      {!isOwnMessage && (
-                        <img
-                          src={msg.avatar}
-                          alt="user"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <span
-                        className={`p-2 rounded-xl max-w-2/3 flex flex-col ${
-                          isOwnMessage ? "bg-gray-400 mr-2" : "bg-gray-500"
+                    <>
+                      <div
+                        key={msg.id}
+                        className={`flex items-center space-x-2 ${
+                          isOwnMessage ? "justify-end" : "justify-start"
                         }`}
                       >
-                        <span className="text-sm font-semibold">
-                          {msg.senderName}
+                        {!isOwnMessage && (
+                          <img
+                            src={msg.avatar}
+                            alt="user"
+                            className="h-10 w-10 rounded-full"
+                          />
+                        )}
+                        <span
+                          className={`p-2 rounded-xl max-w-2/3 flex flex-col ${
+                            isOwnMessage ? "bg-gray-400 mr-2" : "bg-gray-500"
+                          }`}
+                        >
+                          <span className="text-sm font-semibold">
+                            {msg.senderName}
+                          </span>
+                          <span>{msg.text}</span>
+                          <span className="flex justify-end text-[10px] font-semibold italic text-gray-800">
+                            {timeCOnverter(msg.time)}
+                          </span>
                         </span>
-                        <span>{msg.text}</span>
-                        <span className="flex justify-end text-[10px] font-semibold italic text-gray-800">
-                          {timeCOnverter(msg.time)}
-                        </span>
-                      </span>
-                      {isOwnMessage && (
-                        <img
-                          src={msg.avatar}
-                          alt="you"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                    </div>
+                        {isOwnMessage && (
+                          <img
+                            src={msg.avatar}
+                            alt="you"
+                            className="h-10 w-10 rounded-full"
+                          />
+                        )}
+                      </div>
+                      <div ref={bottomRef} />
+                    </>
                   );
                 })
               ) : (
